@@ -1,16 +1,50 @@
-﻿string s = Convert.ToString(32, 2);
-int finalResult = 0;
-int soma = 0;
-for (int i = 1; i < s.Length; i++)
+﻿public class Program
 {
-    if (s[i] == '0')
+    public static void Main(string[] args)
     {
-        soma++;
-    }
-    else if (s[i] == '1')
-    {
-        finalResult = finalResult > soma ? finalResult : soma;
-        soma = 0;
+        List<BuffItem> buff = new();
+        string s = "aab";
+        buff.Add(new BuffItem(1, s.First()));
+
+        for (int i = 1; i < s.Length; i++)
+        {
+            bool isInBuff = false;
+            for (int j = 0; j < buff.Count; j++)
+            {
+                if (buff[j].Caractere == s[i])
+                {
+                    isInBuff = true;
+                    buff[j].Quantidade++;
+                }
+            }
+            if (!isInBuff)
+            {
+                buff.Add(new BuffItem(1, s[i]));
+            }
+        }
+        int sumReturn = 0;
+        for (int i = 0; i < buff.Count; i++)
+        {
+            for (int j = 0; j < buff.Count; j++)
+            {
+                if (buff[i].Quantidade == buff[j].Quantidade && buff[i].Quantidade != 0 && i != j)
+                {
+                    buff[j].Quantidade--;
+                    sumReturn++;
+                }
+            }
+        }
+        Console.WriteLine(sumReturn);
     }
 }
-return finalResult;
+
+public class BuffItem
+{
+    public BuffItem(int i, char s)
+    {
+        Quantidade = i;
+        Caractere = s;
+    }
+    public int Quantidade { get; set; }
+    public char Caractere { get; set; }
+}
