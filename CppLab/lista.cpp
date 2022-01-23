@@ -2,6 +2,15 @@
 #include <iostream>
 using namespace std;
 
+lista::lista()
+{
+	this->listaInteiros = 1;
+}
+
+lista::~lista()
+{
+}
+
 int lista::getPrimeFromElement(int element)
 {
 	int prime = 0;
@@ -30,21 +39,8 @@ bool lista::isPrime(int element)
 	return true;
 }
 
-lista::lista()
-{
-	this->listaInteiros = 0;
-}
-
-lista::~lista()
-{
-}
-
 void lista::add(int n)
 {
-	if (this->listaInteiros == 0) {
-		this->listaInteiros = getPrimeFromElement(n);
-		return;
-	}
 	this->listaInteiros *= getPrimeFromElement(n);
 }
 
